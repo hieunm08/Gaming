@@ -1,9 +1,12 @@
 package dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import entities.TypeRoom;
 import entities.Users;
 import utils.HibernateUtil;
 
@@ -18,6 +21,8 @@ public class UserDAOImpl implements UserDAO {
         try {
             transaction = session.beginTransaction();
             Query query = session.createQuery("FROM Users WHERE username = :username AND password = :password");
+            query.setString("username", username);
+            query.setString("password", password);
             Users user = (Users) query.uniqueResult();
             transaction.commit();
             return user;
@@ -40,14 +45,13 @@ public class UserDAOImpl implements UserDAO {
 	public boolean checkUsername(String username) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = null;
-		String sql = "SELECT  FROM Users WHERE username = '" + username + "'";
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createSQLQuery(sql);
-			Users u = (Users) query.uniqueResult();
-			if (!transaction.wasCommitted())
-				transaction.commit();
-			if (u != null) {
+			Query query = session.createQuery("FROM Users WHERE username = :username");
+			query.setString("username", username);
+			Users user = (Users) query.uniqueResult();
+			transaction.commit();
+			if (user != null) {
 				return true;
 			}
 		} catch (Exception ex) {
@@ -97,6 +101,65 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		return null;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.UserDAO#createUser(entities.Users)
+	 */
+	@Override
+	public boolean createUser(Users users) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(users);
+            transaction.commit();
+            return true;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.UserDAO#updateUser(entities.Users)
+	 */
+	@Override
+	public boolean updateUser(Users users) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.UserDAO#getAll()
+	 */
+	@Override
+	public List<Users> getAll() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Users");
+            List<Users> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+	return null;
 
 	}
 

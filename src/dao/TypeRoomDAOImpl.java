@@ -94,7 +94,7 @@ public class TypeRoomDAOImpl implements TypeRoomDAO {
 	        Transaction transaction = null;
 	        try {
 	            transaction = session.beginTransaction();
-	            Query query = session.createQuery("FROM category WHERE category_id = :categoryId");
+	            Query query = session.createQuery("FROM category WHERE typeRoomId = :typeRoomId");
 	            query.setInteger("typeRoomId", typeRoomId);
 	            TypeRoom obj =  (TypeRoom) query.uniqueResult();
 	            transaction.commit();

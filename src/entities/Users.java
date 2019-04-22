@@ -24,7 +24,7 @@ public class Users  implements Serializable{
 	@Column(name = "email")
 	private String email;
 	@Column(name = "gender")
-	private int gender;
+	private Integer gender;
 	@Column(name = "code")
 	private String code;
 	@Column(name = "note")
@@ -118,7 +118,7 @@ public class Users  implements Serializable{
 		this.email = email;
 	}
 
-	public int getGender() {
+	public Integer getGender() {
 		return gender;
 	}
 

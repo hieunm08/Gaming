@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,10 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AccountDAO;
 import dao.UserDAO;
 import dao.UserDAOImpl;
-import entities.Account;
 import entities.Users;
 
 /**
@@ -53,23 +50,24 @@ public class RegisterServlet extends HttpServlet {
 		username = request.getParameter("username");
 		email = request.getParameter("email");
 		try {
-		/*	if (userDAO.checkUsername(username)) {
+			if (userDAO.checkUsername(username)) {
 				request.setAttribute("message", "Tài khoản đã tồn tại");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("admin/register.jsp");
 				dispatcher.forward(request, response);
-			} else {*/
+			} else {
 				Users user = new Users();
 				user.setUsername(username);
 				user.setPassword(password);
 				user.setName(name);
 				user.setPhone(phone);
 				user.setEmail(email);
-				userDAO.addUser(user);
+				userDAO.createUser(user);
 				response.sendRedirect("admin/login.jsp");
-			
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 }

@@ -32,8 +32,10 @@ public class Room {
 	private String price;
 	@Column(name = "room_status")
 	private int roomStatus;
-	@ManyToOne
-    @JoinColumn(name = "id_typeroom")
+	@Column(name = "id_typeroom", nullable=false)
+	private Integer id_typeroom;
+	@ManyToOne(optional=false)
+    @JoinColumn(name = "id_typeroom",referencedColumnName = "id_typeroom", nullable = false, insertable=false, updatable=false)
 	private TypeRoom typeRoom;
 	
 	/**
@@ -43,13 +45,13 @@ public class Room {
 		super();
 	}
 
-	public Room(int id_room, String roomName, String price, int roomStatus, TypeRoom typeRoom) {
+	public Room(int id_room, String roomName, String price, int roomStatus, int id_typeroom) {
 		super();
 		this.id_room = id_room;
 		this.roomName = roomName;
 		this.price = price;
 		this.roomStatus = roomStatus;
-		this.typeRoom = typeRoom;
+		this.id_typeroom = id_typeroom;
 	}
 
 	public int getId_room() {
@@ -84,6 +86,14 @@ public class Room {
 		this.roomStatus = roomStatus;
 	}
 
+	public int getId_typeroom() {
+		return id_typeroom;
+	}
+
+	public void setId_typeroom(int id_typeroom) {
+		this.id_typeroom = id_typeroom;
+	}
+
 	public TypeRoom getTypeRoom() {
 		return typeRoom;
 	}
@@ -91,6 +101,8 @@ public class Room {
 	public void setTypeRoom(TypeRoom typeRoom) {
 		this.typeRoom = typeRoom;
 	}
+
+	
 	
 	
 

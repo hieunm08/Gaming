@@ -109,4 +109,39 @@ public class RoomDAOImpl implements RoomDAO {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see dao.RoomDAO#getRoomById(int)
+	 */
+	@Override
+	public Room getRoomById(int roomID) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM category WHERE id_room = :roomID");
+            query.setInteger("id_room", roomID);
+            Room room = (Room) query.uniqueResult();
+            transaction.commit();
+            return room;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.RoomDAO#getStatusRoom()
+	 */
+	@Override
+	public void getStatusRoom() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

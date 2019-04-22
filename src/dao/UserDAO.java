@@ -7,6 +7,8 @@
 
 package dao;
 
+import java.util.List;
+
 import entities.Users;
 
 /**
@@ -14,9 +16,11 @@ import entities.Users;
  *
  */
 public interface UserDAO {
-	public Users checkLogin(String username, String password);
-	public boolean checkUsername(String username);
-	public boolean addUser(Users users);
-	public Users getUserByUsername(String username);
+	 Users checkLogin(String username, String password);
+	 boolean checkUsername(String username);
+	 boolean createUser(Users users);
+	 boolean updateUser(Users users);
+	 List<Users> getAll();
+	 Users getUserByUsername(String username);
 
 }

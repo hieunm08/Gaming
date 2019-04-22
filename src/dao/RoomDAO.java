@@ -20,5 +20,7 @@ public interface RoomDAO {
 	 boolean createRoom(Room room);
 	 boolean updateRoom(Room room);
 	 boolean deleteRoom(Room room);
+	 Room getRoomById(int roomID);
+	 void getStatusRoom();
 
 }
