@@ -16,6 +16,18 @@
     <servlet-name>TypeRoomManager</servlet-name>
     <servlet-class>controller.TypeRoomManager</servlet-class>
   </servlet>
+   <servlet>
+    <servlet-name>ServiceManager</servlet-name>
+    <servlet-class>controller.ServiceManager</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ComputerManager</servlet-name>
+    <servlet-class>controller.ComputerManager</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TypeServiceManage</servlet-name>
+  <servlet-class>controller.TypeServiceManager</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>RoomManager</servlet-name>
     <servlet-class>controller.RoomManager</servlet-class>
