@@ -12,6 +12,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <%
 	UserDAO userDAO = new UserDAOImpl();
 	List<Users> listUser = new ArrayList<>();
@@ -76,6 +77,10 @@
 												<th class="sorting" tabindex="0" aria-controls="example1"
 													rowspan="1" colspan="1"
 													aria-label="Platform(s): activate to sort column ascending"
+													style="width: 182px;">avatar</th>
+												<th class="sorting" tabindex="0" aria-controls="example1"
+													rowspan="1" colspan="1"
+													aria-label="Platform(s): activate to sort column ascending"
 													style="width: 182px;">Username</th>
 												<th class="sorting" tabindex="0" aria-controls="example1"
 													rowspan="1" colspan="1"
@@ -109,10 +114,7 @@
 													rowspan="1" colspan="1"
 													aria-label="Platform(s): activate to sort column ascending"
 													style="width: 182px;">note</th>
-												<th class="sorting" tabindex="0" aria-controls="example1"
-													rowspan="1" colspan="1"
-													aria-label="Platform(s): activate to sort column ascending"
-													style="width: 182px;">avatar</th>
+
 												<th class="sorting" tabindex="0" aria-controls="example1"
 													rowspan="1" colspan="1"
 													aria-label="Platform(s): activate to sort column ascending"
@@ -127,8 +129,7 @@
 													style="width: 142px;">updated_at</th>
 												<th class="sorting" tabindex="0" aria-controls="example1"
 													rowspan="1" colspan="1"
-													aria-label="CSS grade: activate to sort column ascending"
-													style="width: 102px;">Action</th>
+													aria-label="CSS grade: activate to sort column ascending">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -139,20 +140,25 @@
 											<tr role="row" class="odd">
 												<td><%=i%></td>
 												<td class="sorting_1"><%=user.getId_user()%></td>
+												<td><img alt="Avatar" class="avatarUser"
+													src="<%=user.getAvatar()%>"></td>
 												<td><%=user.getUsername()%></td>
 												<td><%=user.getPassword()%></td>
+												<td><%=user.getRole()%></td>
+												<td><%=user.getName()%></td>
 												<td><%=user.getPhone()%></td>
+												<td><%=user.getEmail()%></td>
 												<td><%=user.getGender()%></td>
 												<td><%=user.getCode()%></td>
 												<td><%=user.getNote()%></td>
-												<td><%=user.getAvatar()%></td>
+
 												<td><%=user.getBirthday()%></td>
 												<td><%=user.getCreated_at()%></td>
 												<td><%=user.getUpdated_at()%></td>
-												<td><a
-													href="room.jsp?action=edit&roomID=<%=user.getId_user()%>"><button
-															type="button" class="btn btn-info" style="padding: 5px;">Edit</button></a>
-													<a
+												<td class="action"><button type="button"
+														class="btn btn-info" data-toggle="modal"
+														data-target="#formEdit" style="padding: 5px;">Edit</button>
+													</a> <a
 													href="room.jsp?action=delete&roomID=<%=user.getId_user()%>"><button
 															type="button" class="btn btn-danger"
 															style="padding: 5px;">Delete</button></a></td>
@@ -177,6 +183,78 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
+		<div id="formEdit" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div>
+					<div class="modal-body">
+						<div class="box box-primary">
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form role="form">
+								<div class="box-body">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Username</label> <input
+											type="email" class="form-control" id="exampleInputEmail1"
+											placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Password</label> <input
+											type="password" class="form-control"
+											id="exampleInputPassword1" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<div class="radio">
+										<label for="exampleInputPassword1">Role</label>
+											<label radio-inline> <input type="radio" name="optionsRadios"
+												id="optionsRadios1" value="option1" checked="">
+												
+											</label>
+										</div>
+										<div class="radio">
+											<label radio-inline> <input type="radio" name="optionsRadios"
+												id="optionsRadios2" value="option2"> Option two can
+												be something else and selecting it will deselect option one
+											</label>
+										</div radio-inline>
+										<div class="radio">
+											<label> <input type="radio" name="optionsRadios"
+												id="optionsRadios3" value="option3" disabled="">
+												Option three is disabled
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputFile">File input</label> <input
+											type="file" id="exampleInputFile">
+
+										<p class="help-block">Example block-level help text here.</p>
+									</div>
+									<div class="checkbox">
+										<label> <input type="checkbox"> Check me out
+										</label>
+									</div>
+								</div>
+								<!-- /.box-body -->
+
+								<div class="box-footer">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 		<!-- /.row -->
 
 	</section>

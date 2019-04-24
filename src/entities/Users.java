@@ -24,7 +24,7 @@ public class Users  implements Serializable{
 	@Column(name = "email")
 	private String email;
 	@Column(name = "gender")
-	private Integer gender;
+	private boolean gender;
 	@Column(name = "code")
 	private String code;
 	@Column(name = "note")
@@ -43,7 +43,7 @@ public class Users  implements Serializable{
 	}
 
 	public Users(int id_user, String username, String password, int role, String name, String phone,
-			String email, int gender, String code, String note, String avatar, Date birthday, Date created_at,
+			String email, boolean gender, String code, String note, String avatar, Date birthday, Date created_at,
 			Date updated_at) {
 		super();
 		this.id_user = id_user;
@@ -118,11 +118,11 @@ public class Users  implements Serializable{
 		this.email = email;
 	}
 
-	public Integer getGender() {
+	public boolean getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(boolean gender) {
 		this.gender = gender;
 	}
 

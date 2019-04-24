@@ -46,8 +46,8 @@ public class RoomManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
-
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String roomName = request.getParameter("roomName");
 		String roomID = request.getParameter("roomID");
 		String price = request.getParameter("price");

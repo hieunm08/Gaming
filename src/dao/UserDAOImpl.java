@@ -17,25 +17,25 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	public Users checkLogin(String username, String password) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Users WHERE username = :username AND password = :password");
-            query.setString("username", username);
-            query.setString("password", password);
-            Users user = (Users) query.uniqueResult();
-            transaction.commit();
-            return user;
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-        return null;
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("FROM Users WHERE username = :username AND password = :password");
+			query.setString("username", username);
+			query.setString("password", password);
+			Users user = (Users) query.uniqueResult();
+			transaction.commit();
+			return user;
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 
 	/**
@@ -104,62 +104,83 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.UserDAO#createUser(entities.Users)
 	 */
 	@Override
 	public boolean createUser(Users users) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.save(users);
-            transaction.commit();
-            return true;
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.save(users);
+			transaction.commit();
+			return true;
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.UserDAO#updateUser(entities.Users)
 	 */
 	@Override
 	public boolean updateUser(Users users) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.update(users);
+			transaction.commit();
+			return true;
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see dao.UserDAO#getAll()
 	 */
 	@Override
 	public List<Users> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Users");
-            List<Users> list = query.list();
-            transaction.commit();
-            return list;
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-	return null;
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("FROM Users");
+			List<Users> list = query.list();
+			transaction.commit();
+			return list;
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return null;
 
 	}
 

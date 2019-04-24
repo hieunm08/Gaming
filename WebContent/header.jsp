@@ -76,6 +76,23 @@
 	text-align: left;
 }
 .error { color: red; }
+.avatarUser {
+  padding: 5px;
+  transition: transform .2s;
+  border-radius: 0% !important;
+  margin: 0 auto;
+  width: 100px !important;
+  height: auto !important;
+}
+
+.avatarUser:hover {
+  -ms-transform: scale(2); /* IE 9 */
+  -webkit-transform: scale(2); /* Safari 3-8 */
+  transform: scale(2); 
+}
+.action {
+display: inline-flex;
+}
 </style>
 </head>
 <body class="skin-blue sidebar-mini wysihtml5-supported">

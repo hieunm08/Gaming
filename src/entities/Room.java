@@ -33,7 +33,7 @@ public class Room {
 	@Column(name = "room_status")
 	private int roomStatus;
 	@Column(name = "id_typeroom", nullable=false)
-	private Integer id_typeroom;
+	private int id_typeroom;
 	@ManyToOne(optional=false)
     @JoinColumn(name = "id_typeroom",referencedColumnName = "id_typeroom", nullable = false, insertable=false, updatable=false)
 	private TypeRoom typeRoom;
