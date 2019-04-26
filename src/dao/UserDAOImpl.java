@@ -91,7 +91,9 @@ public class UserDAOImpl implements UserDAO {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			Users user = (Users) session.get(Users.class, username);
+			Query query = session.createQuery("FROM Users WHERE username = :username");
+			query.setString("username", username);
+			Users user = (Users) query.uniqueResult();
 			transaction.commit();
 			return user;
 		} catch (Exception e) {
@@ -182,6 +184,54 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return null;
 
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.UserDAO#getUserByID(int)
+	 */
+	@Override
+	public Users getUserByID(int id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			Users user = (Users) session.get(Users.class, id);
+			transaction.commit();
+			return user;
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see dao.UserDAO#checkRegister(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public Users checkRegister(String username, String phone) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("FROM Users WHERE username = :username AND phone = :phone");
+			query.setString("username", username);
+			query.setString("phone", phone);
+			Users user = (Users) query.uniqueResult();
+			transaction.commit();
+			return user;
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			session.flush();
+			session.close();
+		}
+		return null;
 	}
 
 }

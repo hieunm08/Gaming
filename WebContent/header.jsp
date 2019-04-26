@@ -1,3 +1,11 @@
+
+<%@page import="entities.Users"%>
+<%
+	Users user = null;
+	if (session.getAttribute("user") != null) {
+		user = (Users) session.getAttribute("user");
+	}
+%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -28,7 +36,16 @@
 <link rel="stylesheet"
 	href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
 <!-- DataTables -->
-<link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet"
+	href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+<link rel="stylesheet"
+	href="plugins/timepicker/bootstrap-timepicker.min.css">
 <!-- Date Picker -->
 <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
 <!-- jQuery 3 -->
@@ -70,28 +87,37 @@
 	z-index: 10000;
 }
 
+.modal-full {
+	min-width: 60%;
+}
+
 .jqsfield {
 	color: white;
 	font: 10px arial, san serif;
 	text-align: left;
 }
-.error { color: red; }
+
+.error {
+	color: red;
+}
+
 .avatarUser {
-  padding: 5px;
-  transition: transform .2s;
-  border-radius: 0% !important;
-  margin: 0 auto;
-  width: 100px !important;
-  height: auto !important;
+	padding: 5px;
+	transition: transform .2s;
+	border-radius: 0% !important;
+	margin: 0 auto;
+	width: 100px !important;
+	height: auto !important;
 }
 
 .avatarUser:hover {
-  -ms-transform: scale(2); /* IE 9 */
-  -webkit-transform: scale(2); /* Safari 3-8 */
-  transform: scale(2); 
+	-ms-transform: scale(2); /* IE 9 */
+	-webkit-transform: scale(2); /* Safari 3-8 */
+	transform: scale(2);
 }
+
 .action {
-display: inline-flex;
+	display: inline-flex;
 }
 </style>
 </head>
@@ -314,37 +340,21 @@ display: inline-flex;
 								<li class="footer"><a href="#">View all tasks</a></li>
 							</ul></li>
 						<!-- User Account: style can be found in dropdown.less -->
+						<%
+							if (user != null) {
+						%>
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
-								src="dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image"> <span class="hidden-xs">Alexander
-									Pierce</span>
+								src="<%=user.getAvatar()%>" class="user-image" alt="User Image">
+								<span class="hidden-xs"><%=user.getName()%></span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
-								<li class="user-header"><img
-									src="dist/img/user2-160x160.jpg" class="img-circle"
-									alt="User Image">
-
+								<li class="user-header"><img src="<%=user.getAvatar()%>"
+									class="img-circle" alt="User Image"> <!-- Menu Body -->
 									<p>
-										Alexander Pierce - Web Developer <small>Member since
-											Nov. 2012</small>
-									</p></li>
-								<!-- Menu Body -->
-								<li class="user-body">
-									<div class="row">
-										<div class="col-xs-4 text-center">
-											<a href="#">Followers</a>
-										</div>
-										<div class="col-xs-4 text-center">
-											<a href="#">Sales</a>
-										</div>
-										<div class="col-xs-4 text-center">
-											<a href="#">Friends</a>
-										</div>
-									</div> <!-- /.row -->
-								</li>
-								<!-- Menu Footer-->
+										<%=user.getName() %> <small>Administrator</small>
+									</p> <!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
 										<a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -353,6 +363,9 @@ display: inline-flex;
 										<a href="logout" class="btn btn-default btn-flat">Sign out</a>
 									</div>
 								</li>
+								<%
+									}
+								%>
 							</ul></li>
 						<!-- Control Sidebar Toggle Button -->
 						<li><a href="#" data-toggle="control-sidebar"><i

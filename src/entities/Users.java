@@ -32,19 +32,19 @@ public class Users  implements Serializable{
 	@Column(name = "avatar")
 	private String avatar;
 	@Column(name = "birthday")
-	private Date birthday;
+	private String birthday;
 	@Column(name = "created_at")
-	private Date created_at;
+	private String created_at;
 	@Column(name = "updated_at")
-	private Date updated_at;
+	private String updated_at;
 
 	public Users() {
 		super();
 	}
 
 	public Users(int id_user, String username, String password, int role, String name, String phone,
-			String email, boolean gender, String code, String note, String avatar, Date birthday, Date created_at,
-			Date updated_at) {
+			String email, boolean gender, String code, String note, String avatar, String birthday, String created_at,
+			String updated_at) {
 		super();
 		this.id_user = id_user;
 		this.username = username;
@@ -147,30 +147,30 @@ public class Users  implements Serializable{
 	}
 
 	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+		this.avatar = "images/avatar"+avatar;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	public Date getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 
-	public Date getUpdated_at() {
+	public String getUpdated_at() {
 		return updated_at;
 	}
 
-	public void setUpdated_at(Date updated_at) {
+	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
 	

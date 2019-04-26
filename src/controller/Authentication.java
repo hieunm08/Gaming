@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.UserDAO;
 import dao.UserDAOImpl;
 import entities.Users;
+import service.MD5;
 
 /**
  * Servlet implementation class Authentication
@@ -40,7 +41,7 @@ public class Authentication extends HttpServlet {
 		{
 			request.getSession(false).invalidate();
 		}
-		response.sendRedirect("admin/login.jsp");
+		response.sendRedirect("login.jsp");
 	}
 
 	/**
@@ -54,7 +55,8 @@ public class Authentication extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
-		Users users = userDAO.checkLogin(username, password);
+		Users users = userDAO.checkLogin(username, MD5.encryption(password));
+		Users user = new Users();
 		try {
 			if (users != null) {
 				/*int role = userDAO.getUserByUsername(username).getRole();
@@ -63,12 +65,17 @@ public class Authentication extends HttpServlet {
 					session.setAttribute("username", "admin");
 					response.sendRedirect("admin/index.jsp");
 				}*/
+				user = userDAO.getUserByUsername(username);
+				if (user != null) {
+					session.setAttribute("user", user);
+				}
 				session.setMaxInactiveInterval(100000);
 				session.setAttribute("username", "admin");
-				response.sendRedirect("admin/index.jsp");
+				response.sendRedirect("index.jsp");
 			} else {
-				request.setAttribute("message", "Tài khoản hoặc mật khẩu không chính xác");
-				response.sendRedirect("admin/index.jsp");
+				request.setAttribute("message", "Username or password is incorrect!!!");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+				requestDispatcher.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,7 +11,9 @@
 	content="Gaming Login Form Widget Tab Form,Login Forms,Sign up Forms,Registration Forms,News letter Forms,Elements" />
 <script type="application/x-javascript">
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 </script>
 <link href="css/style1.css" rel="stylesheet" type="text/css" media="all" />
@@ -38,20 +40,35 @@
 		<div class="design-w3l">
 			<div class="mail-form-agile">
 				<span style="color: red">${message}</span>
-				<form id="lf" action="${pageContext.request.contextPath}/login"
+				<form id="rf" action="${pageContext.request.contextPath}/register"
 					method="post">
 					<div class="form-group has-feedback">
-						<input type="text" name="username"
-							placeholder="User Name  or  email..." required="" />
+						<input type="text" class="form-control" name="username"
+							placeholder="Username" required="required"> 
 					</div>
 					<div class="form-group has-feedback">
-					<input type="password" name="password" class="padding"
-						placeholder="Password" required="" /> <input type="submit"
+						<input type="text" class="form-control" name="name"
+							placeholder="Full name" required="required"> 
+					</div>
+					<div class="form-group has-feedback">
+						<input type="text" class="form-control" name="phone"
+							placeholder="Phone" required="required"> 
+					<div class="form-group has-feedback">
+						<input type="text" class="form-control" name="email"
+							placeholder="Email" required="required"> 
+					</div>
+					<div class="form-group has-feedback">
+						<input type="password" id="password" class="form-control"
+							name="password" placeholder="Password" required="required"> 
+					</div>
+					<div class="form-group has-feedback">
+						<input type="password" class="form-control" name="repassword"
+							placeholder="Retype password" required="required"> 
+					</div>
+					<input type="submit"
 						value="submit">
-						</div>
 				</form>
-				<a href="register.jsp" class="text-center">Register a new
-					membership</a>
+		
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -64,6 +81,31 @@
 	</div>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
+	<script>
+		$(function() {
+			$("#rf").validate({
+				rules : {
+					fullname : "required",
+					username : "required",
+					password : "required",
+					phone : "required",
+					email : "required",
+					repassword : "required",
+					repassword : {
+						equalTo : "#password"
+					}
+				},
+				messages : {
+					fullname : "Vui lòng nhập tên của bạn!",
+					username : "Vui lòng nhập tài khoản",
+					password : "Vui lòng nhập mật khẩu!",
+					phone : "Vui lòng nhập số điện thoại!",
+					email : "Vui lòng nhập Email!",
+					repassword : "Vui lòng nhập lại mật khẩu",
+					repassword : "mật khẩu không trùng khớp!"
+				}
+			});
+		});
+	</script>
 </body>
 </html>

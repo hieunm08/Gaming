@@ -73,7 +73,7 @@
 												<th class="sorting" tabindex="0" aria-controls="example1"
 													rowspan="1" colspan="1"
 													aria-label="Browser: activate to sort column ascending"
-													style="width: 205px;">ID Number</th>
+													style="width: 205px;">ID </th>
 												<th class="sorting" tabindex="0" aria-controls="example1"
 													rowspan="1" colspan="1"
 													aria-label="Platform(s): activate to sort column ascending"
@@ -155,7 +155,8 @@
 												<td><%=user.getBirthday()%></td>
 												<td><%=user.getCreated_at()%></td>
 												<td><%=user.getUpdated_at()%></td>
-												<td class="action"><button type="button"
+												<td class="action">
+												<button type="button" 
 														class="btn btn-info" data-toggle="modal"
 														data-target="#formEdit" style="padding: 5px;">Edit</button>
 													</a> <a
@@ -183,14 +184,15 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
+		
 		<div id="formEdit" class="modal fade" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-full">
 
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
+						<h4 class="modal-title">Edit User Infomation</h4>
 					</div>
 					<div class="modal-body">
 						<div class="box box-primary">
@@ -201,44 +203,98 @@
 									<div class="form-group">
 										<label for="exampleInputEmail1">Username</label> <input
 											type="email" class="form-control" id="exampleInputEmail1"
-											placeholder="Enter email">
+											placeholder="Enter email" name="username">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Password</label> <input
 											type="password" class="form-control"
-											id="exampleInputPassword1" placeholder="Password">
+											id="exampleInputPassword1" placeholder="Password" name="password">
 									</div>
 									<div class="form-group">
-										<div class="radio">
 										<label for="exampleInputPassword1">Role</label>
-											<label radio-inline> <input type="radio" name="optionsRadios"
-												id="optionsRadios1" value="option1" checked="">
-												
-											</label>
-										</div>
 										<div class="radio">
-											<label radio-inline> <input type="radio" name="optionsRadios"
-												id="optionsRadios2" value="option2"> Option two can
-												be something else and selecting it will deselect option one
+											<label class="radio-inline"> <input type="radio"
+												name="role" checked>Admin
+											</label> <label class="radio-inline"> <input type="radio"
+												name="role">Employee
+											</label> <label class="radio-inline"> <input type="radio"
+												name="role">Customer
 											</label>
-										</div radio-inline>
-										<div class="radio">
-											<label> <input type="radio" name="optionsRadios"
-												id="optionsRadios3" value="option3" disabled="">
-												Option three is disabled
-											</label>
+
 										</div>
 									</div>
 									<div class="form-group">
-										<label for="exampleInputFile">File input</label> <input
-											type="file" id="exampleInputFile">
+										<label for="exampleInputPassword1">Name</label> <input
+											type="password" class="form-control"
+											id="exampleInputPassword1" placeholder="Password" name="name">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputFile">Avatar</label> <input
+											type="file" id="exampleInputFile" name="avatar">
 
 										<p class="help-block">Example block-level help text here.</p>
 									</div>
-									<div class="checkbox">
-										<label> <input type="checkbox"> Check me out
-										</label>
+									<div class="form-group">
+										<label>Date of birth:</label>
+
+										<div class="input-group date">
+											<div class="input-group-addon">
+												<i class="fa fa-calendar"></i>
+											</div>
+											<input type="text" class="form-control pull-right"
+												id="datepicker" name = "birthday">
+										</div>
+										<!-- /.input group -->
 									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Phone</label> <input
+											type="password" class="form-control"
+											id="exampleInputPassword1" placeholder="Password" name="phone">
+									</div>
+									<div class="form-group">
+										<label>Email:</label>
+										<div class="input-group">
+											<span class="input-group-addon"><i
+												class="fa fa-envelope"></i></span> <input type="email"
+												class="form-control" placeholder="Email" name="email">
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Phone:</label>
+
+										<div class="input-group">
+											<div class="input-group-addon">
+												<i class="fa fa-phone"></i>
+											</div>
+											<input type="text" class="form-control"
+												data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;"
+												data-mask="" name="phone">
+										</div>
+										<!-- /.input group -->
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Gender</label>
+										<div class="radio">
+											<label class="radio-inline"> <input type="radio"
+												name="gender" checked>Male
+											</label> <label class="radio-inline"> <input type="radio"
+												name="gender">Female
+											</label>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Code</label> <input
+											type="password" class="form-control"
+											id="exampleInputPassword1" placeholder="Password" name="code">
+									</div>
+									<div class="form-group">
+										<label>Note</label>
+										<textarea class="form-control" rows="3" name="note"
+											placeholder="Enter ..."></textarea>
+									</div>
+
+				
 								</div>
 								<!-- /.box-body -->
 
@@ -271,6 +327,97 @@
 			'info' : true,
 			'autoWidth' : false
 		})
+	});
+</script>
+<script>
+	$('#datepicker').datepicker({
+		uiLibrary : 'bootstrap4'
+	});
+</script>
+<script>
+	$(function() {
+		//Initialize Select2 Elements
+		$('.select2').select2()
+
+		//Datemask dd/mm/yyyy
+		$('#datemask').inputmask('dd/mm/yyyy', {
+			'placeholder' : 'dd/mm/yyyy'
+		})
+		//Datemask2 mm/dd/yyyy
+		$('#datemask2').inputmask('mm/dd/yyyy', {
+			'placeholder' : 'mm/dd/yyyy'
+		})
+		//Money Euro
+		$('[data-mask]').inputmask()
+
+		//Date range picker
+		$('#reservation').daterangepicker()
+		//Date range picker with time picker
+		$('#reservationtime').daterangepicker({
+			timePicker : true,
+			timePickerIncrement : 30,
+			format : 'MM/DD/YYYY h:mm A'
+		})
+		//Date range as a button
+		$('#daterange-btn').daterangepicker(
+				{
+					ranges : {
+						'Today' : [ moment(), moment() ],
+						'Yesterday' : [ moment().subtract(1, 'days'),
+								moment().subtract(1, 'days') ],
+						'Last 7 Days' : [ moment().subtract(6, 'days'),
+								moment() ],
+						'Last 30 Days' : [ moment().subtract(29, 'days'),
+								moment() ],
+						'This Month' : [ moment().startOf('month'),
+								moment().endOf('month') ],
+						'Last Month' : [
+								moment().subtract(1, 'month').startOf('month'),
+								moment().subtract(1, 'month').endOf('month') ]
+					},
+					startDate : moment().subtract(29, 'days'),
+					endDate : moment()
+				},
+				function(start, end) {
+					$('#daterange-btn span').html(
+							start.format('MMMM D, YYYY') + ' - '
+									+ end.format('MMMM D, YYYY'))
+				})
+
+		//Date picker
+		$('#datepicker').datepicker({
+			autoclose : true
+		})
+
+		//iCheck for checkbox and radio inputs
+		$('input[type="checkbox"].minimal, input[type="radio"].minimal')
+				.iCheck({
+					checkboxClass : 'icheckbox_minimal-blue',
+					radioClass : 'iradio_minimal-blue'
+				})
+		//Red color scheme for iCheck
+		$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red')
+				.iCheck({
+					checkboxClass : 'icheckbox_minimal-red',
+					radioClass : 'iradio_minimal-red'
+				})
+		//Flat red color scheme for iCheck
+		$('input[type="checkbox"].flat-red, input[type="radio"].flat-red')
+				.iCheck({
+					checkboxClass : 'icheckbox_flat-green',
+					radioClass : 'iradio_flat-green'
+				})
+
+		//Colorpicker
+		$('.my-colorpicker1').colorpicker()
+		//color picker with addon
+		$('.my-colorpicker2').colorpicker()
+
+		//Timepicker
+		$('.timepicker').timepicker({
+			showInputs : false
+		})
 	})
 </script>
+
 <jsp:include page="footer.jsp"></jsp:include>
